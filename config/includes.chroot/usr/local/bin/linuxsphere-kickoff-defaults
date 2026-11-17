@@ -1,0 +1,9 @@
+#!/bin/sh
+# Sets the LinuxSpherso start-menu favourites as Kickoff's built-in default.
+# Kickoff imports this default the first time a user's menu is created.
+# Re-run automatically after apt upgrades (see /etc/apt/apt.conf.d/99linuxsphere-kickoff).
+X=/usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/config/main.xml
+[ -f "$X" ] || exit 0
+FAV='preferred://browser,org.kde.dolphin.desktop,org.kde.konsole.desktop,winboat.desktop,steam.desktop,net.lutris.Lutris.desktop,mintinstall.desktop,org.gnome.Software.desktop,snap-store_snap-store.desktop,org.kde.discover.desktop,net.davidotek.pupgui2.desktop,com.usebottles.bottles.desktop,systemsettings.desktop'
+grep -q "<default>$FAV</default>" "$X" && exit 0
+sed -i "/<entry name=\"favorites\" type=\"StringList\">/,/<\/entry>/ s|<default>.*</default>|<default>$FAV</default>|" "$X"

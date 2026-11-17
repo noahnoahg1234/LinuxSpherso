@@ -1,0 +1,2 @@
+// Keep LinuxSpherso's start-menu favourites after Plasma upgrades
+DPkg::Post-Invoke { "[ -x /usr/local/bin/linuxsphere-kickoff-defaults ] && /usr/local/bin/linuxsphere-kickoff-defaults || true"; };

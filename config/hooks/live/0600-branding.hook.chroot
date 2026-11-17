@@ -44,6 +44,8 @@ R
 # Refresh icon caches so the custom start-menu icon is found
 gtk-update-icon-cache -f -t /usr/share/icons/hicolor 2>/dev/null || true
 gtk-update-icon-cache -f -t /usr/share/icons/Papirus-Dark 2>/dev/null || true
+# Start-menu favourites default
+/usr/local/bin/linuxsphere-kickoff-defaults
 # Snap Store first-boot service
 systemctl enable linuxsphere-firstboot.service || true
 systemctl enable snapd.socket snapd.apparmor.service || true

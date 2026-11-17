@@ -49,14 +49,14 @@ dock.alignment = "center";
 dock.hiding = "dodgewindows";  // slides away when a window touches it
 dock.opacity = "translucent";
 
+// Favourites come from /usr/local/bin/linuxsphere-kickoff-defaults (Kickoff reads them
+// as soon as it is created, before this script can set them).
 var menu = dock.addWidget("org.kde.plasma.kickoff");      // the Sphere start menu
 menu.currentConfigGroup = ["General"];
 menu.writeConfig("icon", "linuxsphere-start");
 menu.writeConfig("favoritesDisplay", "0");   // grid
 menu.writeConfig("applicationsDisplay", "0");
 menu.writeConfig("switchCategoryOnHover", "true");
-menu.writeConfig("favoritesPortedToKAstats", "false"); // let Plasma import the list below
-menu.writeConfig("favorites", ["preferred://browser", "org.kde.dolphin.desktop", "org.kde.konsole.desktop", "winboat.desktop", "steam.desktop", "mintinstall.desktop", "org.gnome.Software.desktop", "io.snapcraft.Store.desktop", "org.kde.discover.desktop", "net.davidotek.pupgui2.desktop", "com.usebottles.bottles.desktop", "systemsettings.desktop"]);
 dock.addWidget("org.kde.plasma.marginsseparator");
 
 var tasks = dock.addWidget("org.kde.plasma.icontasks");
