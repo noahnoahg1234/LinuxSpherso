@@ -1,9 +1,13 @@
 #!/bin/sh
-# Sets the LinuxSpherso start-menu favourites as Kickoff's built-in default.
-# Kickoff imports this default the first time a user's menu is created.
+# Sets the LinuxSpherso start-menu favourites as the built-in default of every
+# KDE launcher. Kicker/Application Dashboard (favoriteApps) and Kickoff (favorites)
+# share one favourites list, seeded from whichever launcher starts first.
 # Re-run automatically after apt upgrades (see /etc/apt/apt.conf.d/99linuxsphere-kickoff).
-X=/usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/config/main.xml
-[ -f "$X" ] || exit 0
 FAV='preferred://browser,org.kde.dolphin.desktop,org.kde.konsole.desktop,winboat.desktop,steam.desktop,net.lutris.Lutris.desktop,mintinstall.desktop,org.gnome.Software.desktop,snap-store_snap-store.desktop,org.kde.discover.desktop,net.davidotek.pupgui2.desktop,com.usebottles.bottles.desktop,systemsettings.desktop'
-grep -q "<default>$FAV</default>" "$X" && exit 0
-sed -i "/<entry name=\"favorites\" type=\"StringList\">/,/<\/entry>/ s|<default>.*</default>|<default>$FAV</default>|" "$X"
+P=/usr/share/plasma/plasmoids
+for pair in org.kde.plasma.kickoff:favorites org.kde.plasma.kicker:favoriteApps; do
+  X="$P/${pair%%:*}/contents/config/main.xml"; KEY="${pair#*:}"
+  [ -f "$X" ] || continue
+  sed -i "/<entry name=\"$KEY\" type=\"StringList\">/,/<\/entry>/ s|<default>.*</default>|<default>$FAV</default>|" "$X"
+done
+exit 0
