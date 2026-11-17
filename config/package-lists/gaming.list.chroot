@@ -1,0 +1,10 @@
+# --- Wine + Proton stack (32-bit parts + Steam are installed in hooks/live/0100-i386.hook.chroot) ---
+wine
+wine64
+winetricks
+fonts-wine
+mesa-vulkan-drivers
+vulkan-tools
+gamemode
+mangohud
+lutris

@@ -1,0 +1,5 @@
+# Mint repo is only used for Mint's Software Manager and its Mint-only deps.
+# Low priority means it never replaces Debian packages.
+Package: *
+Pin: origin packages.linuxmint.com
+Pin-Priority: 100

@@ -1,0 +1,8 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+# Flathub + Proton tools + extra app-format helpers.
+set +e
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+for app in net.davidotek.pupgui2 com.usebottles.bottles it.mijorus.gearlever com.github.tchx84.Flatseal; do
+  flatpak install -y --noninteractive flathub "$app" || echo "W: flatpak $app failed"
+done

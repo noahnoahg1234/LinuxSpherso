@@ -1,0 +1,26 @@
+title-text: ""
+desktop-image: "background.png"
+desktop-color: "#05060f"
+terminal-font: "JetBrains Mono Regular 16"
++ boot_menu {
+  left = 30%
+  top = 62%
+  width = 40%
+  height = 28%
+  item_font = "JetBrains Mono Regular 16"
+  item_color = "#b8d8ff"
+  selected_item_color = "#ffffff"
+  item_height = 34
+  item_padding = 12
+  item_spacing = 6
+  selected_item_pixmap_style = "select_*.png"
+}
++ label {
+  top = 95%
+  left = 0
+  width = 100%
+  align = "center"
+  color = "#7fa8d8"
+  font = "JetBrains Mono Regular 16"
+  text = "LinuxSpherso  -  Enter to boot  -  e to edit"
+}

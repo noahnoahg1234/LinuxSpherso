@@ -1,0 +1,23 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+# Point Calamares at LinuxSpherso branding and add users to docker/kvm (needed by WinBoat).
+set -e
+S=/etc/calamares/settings.conf
+[ -f "$S" ] && sed -i 's/^branding:.*/branding: linuxsphere/' "$S"
+U=/etc/calamares/modules/users.conf
+if [ -f "$U" ]; then
+  if grep -q '^defaultGroups' "$U"; then
+    python3 - "$U" <<'P'
+import sys,re
+p=sys.argv[1]; s=open(p).read()
+for g in ("docker","kvm"):
+    if g not in s: s=re.sub(r'(defaultGroups:\s*\n)', r'\1    - '+g+'\n', s, count=1)
+open(p,'w').write(s)
+P
+  fi
+fi
+# Rename the desktop installer launcher
+for f in /usr/share/applications/*install-debian.desktop; do
+  [ -f "$f" ] && sed -i 's/^Name=.*/Name=Install LinuxSpherso/; s/^Name\[\(.*\)\]=.*//' "$f"
+done
+true

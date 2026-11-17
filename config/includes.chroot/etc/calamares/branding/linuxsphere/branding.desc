@@ -1,0 +1,26 @@
+---
+componentName: linuxsphere
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 1000px,640px
+strings:
+    productName:         LinuxSpherso
+    shortProductName:    LinuxSpherso
+    version:             1.0
+    shortVersion:        1.0
+    versionedName:       LinuxSpherso 1.0 (Glass)
+    shortVersionedName:  LinuxSpherso 1.0
+    bootloaderEntryName: LinuxSpherso
+    productUrl:          https://github.com/linuxspherso
+images:
+    productLogo:         "logo.svg"
+    productIcon:         "logo.svg"
+    productWelcome:      "welcome.png"
+slideshow:               "show.qml"
+slideshowAPI:            2
+style:
+   SidebarBackground:        "#0b0f2a"
+   SidebarText:              "#e6f2ff"
+   SidebarTextCurrent:       "#00d0ff"
+   SidebarBackgroundCurrent: "#1a2050"

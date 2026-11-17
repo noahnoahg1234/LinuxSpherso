@@ -1,0 +1,11 @@
+[Default Applications]
+application/x-rpm=sphere-install.desktop
+application/x-redhat-package-manager=sphere-install.desktop
+application/vnd.debian.binary-package=sphere-install.desktop
+application/vnd.flatpak.ref=sphere-install.desktop
+application/vnd.snap=sphere-install.desktop
+application/x-appimage=sphere-install.desktop
+application/vnd.appimage=sphere-install.desktop
+application/x-ms-dos-executable=wine.desktop
+application/x-msi=wine.desktop
+application/vnd.android.package-archive=sphere-install.desktop

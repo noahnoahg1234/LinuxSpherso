@@ -1,0 +1,6 @@
+#!/bin/sh
+# Rename live-build's default boot menu entries (runs in the binary/ dir before the ISO is made).
+for f in boot/grub/grub.cfg boot/grub/*.cfg isolinux/*.cfg; do
+  [ -f "$f" ] && sed -i 's/Live system/LinuxSpherso Live/g; s/Live Boot Menu with GRUB/LinuxSpherso Boot Menu/g' "$f"
+done
+true

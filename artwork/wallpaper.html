@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:JBM;src:url(file:///usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-Bold.ttf)}
+@font-face{font-family:JBML;src:url(file:///usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-Light.ttf)}
+html,body{margin:0;width:3840px;height:2160px;overflow:hidden}
+body{background:
+ radial-gradient(ellipse 1400px 900px at 22% 18%, rgba(120,60,255,.45), transparent 70%),
+ radial-gradient(ellipse 1500px 1000px at 82% 85%, rgba(0,200,255,.35), transparent 70%),
+ radial-gradient(ellipse 900px 700px at 85% 15%, rgba(255,60,170,.25), transparent 70%),
+ linear-gradient(160deg,#05060f 0%,#0b0f2a 45%,#060914 100%);position:relative}
+.dot{position:absolute;border-radius:50%;filter:blur(2px)}
+.floor{position:absolute;left:50%;top:1720px;width:1500px;height:200px;margin-left:-750px;border-radius:50%;
+ background:radial-gradient(ellipse at center, rgba(90,200,255,.45), rgba(120,80,255,.18) 45%, transparent 70%);filter:blur(30px)}
+.sphere{position:absolute;left:50%;top:50%;width:1300px;height:1300px;margin:-700px 0 0 -650px;border-radius:50%;
+ background:
+  radial-gradient(circle at 30% 25%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 18%, transparent 35%),
+  radial-gradient(circle at 70% 80%, rgba(0,220,255,.45) 0%, transparent 40%),
+  radial-gradient(circle at 25% 75%, rgba(170,90,255,.35) 0%, transparent 40%),
+  radial-gradient(circle at 50% 50%, rgba(40,60,140,.10) 0%, rgba(30,40,110,.25) 60%, rgba(140,200,255,.55) 92%, rgba(255,255,255,.85) 99%, transparent 100%);
+ box-shadow: inset 0 0 120px rgba(150,210,255,.45), inset -60px -80px 200px rgba(0,180,255,.35), inset 60px 60px 160px rgba(200,140,255,.25), 0 0 220px rgba(80,160,255,.35)}
+.spec{position:absolute;border-radius:50%}
+.s1{left:300px;top:150px;width:420px;height:260px;transform:rotate(-30deg);background:radial-gradient(ellipse at center,rgba(255,255,255,.85),rgba(255,255,255,0) 70%);filter:blur(8px)}
+.s2{left:880px;top:930px;width:180px;height:110px;transform:rotate(-30deg);background:radial-gradient(ellipse at center,rgba(255,255,255,.6),transparent 70%);filter:blur(6px)}
+.rim{position:absolute;inset:0;border-radius:50%;border:3px solid rgba(255,255,255,.35);
+ -webkit-mask:radial-gradient(circle at 30% 25%, #000 0, transparent 75%)}
+.ring{position:absolute;inset:-60px;border-radius:50%;border:2px solid rgba(120,200,255,.18);transform:rotateX(75deg)}
+.text{position:absolute;left:0;right:0;top:960px;text-align:center;font-family:JBM;font-size:270px;letter-spacing:6px;color:rgba(255,255,255,.96);
+ text-shadow:0 0 40px rgba(120,200,255,.9),0 0 120px rgba(140,100,255,.7),0 6px 0 rgba(0,0,0,.25)}
+.sub{position:absolute;left:0;right:0;top:1300px;text-align:center;font-family:JBML;font-size:56px;letter-spacing:28px;color:rgba(200,230,255,.65)}
+.cursor{display:inline-block;width:120px;height:230px;background:rgba(120,220,255,.85);margin-left:20px;vertical-align:-20px;box-shadow:0 0 50px rgba(120,220,255,.9)}
+</style></head><body>
+<div id="dots"></div><div class="floor"></div>
+<div class="sphere"><div class="ring"></div><div class="rim"></div><div class="spec s1"></div><div class="spec s2"></div></div>
+<div class="text">Linux Sphere<span class="cursor"></span></div>
+<div class="sub">LINUXSPHERSO</div>
+<script>
+let s=7,r=()=>(s=(s*16807)%2147483647)/2147483647,d=document.getElementById('dots');
+for(let i=0;i<140;i++){let e=document.createElement('div');e.className='dot';let z=r()*14+2;
+e.style.cssText=`left:${r()*3840}px;top:${r()*2160}px;width:${z}px;height:${z}px;background:rgba(${150+r()*100|0},${180+r()*75|0},255,${.15+r()*.5})`;d.appendChild(e)}
+</script></body></html>

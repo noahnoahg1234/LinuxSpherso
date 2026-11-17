@@ -1,0 +1,6 @@
+# --- WinBoat runtime: Windows in a container, apps shown via RDP ---
+docker.io
+docker-compose
+freerdp3-x11
+qemu-system-x86
+iptables

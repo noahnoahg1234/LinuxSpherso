@@ -1,0 +1,5 @@
+#!/bin/sh
+# Snap Store can't be installed inside the build chroot (snapd isn't running), so do it on first boot.
+for i in $(seq 1 30); do snap wait system seed.loaded && break; sleep 5; done
+snap install snap-store && snap install snapd-desktop-integration || exit 1
+mkdir -p /var/lib/linuxsphere && touch /var/lib/linuxsphere/firstboot-done

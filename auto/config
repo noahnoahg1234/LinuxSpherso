@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+lb config noauto \
+  --distribution trixie \
+  --archive-areas "main contrib non-free non-free-firmware" \
+  --architectures amd64 \
+  --linux-flavours amd64 \
+  --bootloaders "grub-efi grub-pc" \
+  --binary-images iso-hybrid \
+  --debian-installer none \
+  --iso-application "LinuxSpherso" \
+  --iso-publisher "LinuxSpherso Project" \
+  --iso-volume "LinuxSpherso" \
+  --image-name "LinuxSpherso" \
+  --bootappend-live "boot=live components quiet splash username=sphere user-fullname=LinuxSpherso hostname=linuxsphere user-default-groups=audio,cdrom,dip,floppy,video,plugdev,netdev,bluetooth,docker,kvm,libvirt,sudo" \
+  --memtest none \
+  --mirror-bootstrap https://deb.debian.org/debian \
+  --mirror-chroot https://deb.debian.org/debian \
+  --mirror-binary https://deb.debian.org/debian \
+  --mirror-chroot-security https://security.debian.org/debian-security \
+  --mirror-binary-security https://security.debian.org/debian-security \
+  --apt-recommends true \
+  --firmware-chroot false \
+  "${@}"

@@ -1,0 +1,27 @@
+#!/bin/bash
+# sphere-install: install/run almost any Linux (or Windows/Android) app package.
+# Usage: sphere-install <file|flatpak-id|snap-name>
+set -e
+f="$1"; [ -n "$f" ] || { echo "usage: sphere-install <package file | flatpak id | snap name>"; exit 1; }
+say(){ command -v notify-send >/dev/null && notify-send -i linuxsphere-start "Sphere Install" "$1"; echo "$1"; }
+asroot(){ if [ "$(id -u)" = 0 ]; then "$@"; elif [ -n "$DISPLAY$WAYLAND_DISPLAY" ] && command -v pkexec >/dev/null; then pkexec "$@"; else sudo "$@"; fi; }
+case "${f,,}" in
+  *.deb)               asroot apt-get install -y "$(realpath "$f")" ;;
+  *.rpm)               tmp=$(mktemp -d); (cd "$tmp" && asroot alien --to-deb --scripts "$(realpath "$OLDPWD/$f")" >/dev/null) ; asroot apt-get install -y "$tmp"/*.deb ;;
+  *.flatpakref|*.flatpak) flatpak install -y --user "$f" ;;
+  *.flatpakrepo)       flatpak remote-add --user --if-not-exists "$(basename "$f" .flatpakrepo)" "$f" ;;
+  *.snap)              asroot snap install --dangerous "$f" ;;
+  *.appimage)          d="$HOME/Applications"; mkdir -p "$d"; cp "$f" "$d/"; chmod +x "$d/$(basename "$f")"
+                       if flatpak info it.mijorus.gearlever >/dev/null 2>&1; then flatpak run it.mijorus.gearlever "$d/$(basename "$f")"; else "$d/$(basename "$f")" & fi ;;
+  *.exe|*.msi|*.bat)   if [ "${SPHERE_WINDOWS:-wine}" = winboat ]; then winboat & else wine start /unix "$(realpath "$f")"; fi ;;
+  *.apk)               waydroid app install "$f" ;;
+  *.pkg.tar.zst|*.pkg.tar.xz) distrobox create -Y -n arch -i docker.io/library/archlinux:latest 2>/dev/null || true
+                       distrobox enter arch -- sudo pacman -U --noconfirm "$(realpath "$f")" ;;
+  *.sh|*.run|*.bin)    chmod +x "$f"; "$(realpath "$f")" ;;
+  *.tar.gz|*.tgz|*.tar.xz|*.tar.bz2|*.zip) d="$HOME/Applications/$(basename "$f" | sed 's/\.\(tar\..*\|tgz\|zip\)$//')"; mkdir -p "$d"
+                       case "$f" in *.zip) unzip -q "$f" -d "$d";; *) tar -xf "$f" -C "$d";; esac; say "Extracted to $d"; exit 0 ;;
+  *.*.*)               [ -e "$f" ] && { echo "Unknown file type: $f"; exit 2; }; flatpak install -y flathub "$f" ;;   # looks like a flatpak id (org.foo.Bar)
+  *.*)                 echo "Unknown file type: $f"; exit 2 ;;
+  *)                   apt-cache show "$f" >/dev/null 2>&1 && asroot apt-get install -y "$f" || asroot snap install "$f" ;;
+esac
+say "Done: $(basename "$f")"

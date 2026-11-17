@@ -1,0 +1,19 @@
+# --- App stores ---
+# Debian store
+gnome-software
+gnome-software-plugin-flatpak
+gnome-software-plugin-snap
+synaptic
+# KDE store
+plasma-discover
+plasma-discover-backend-flatpak
+plasma-discover-backend-fwupd
+# Ubuntu store runtime (Snap Store itself is installed on first boot)
+snapd
+# --- Supported app formats ---
+flatpak
+libfuse2t64
+alien
+rpm
+distrobox
+podman

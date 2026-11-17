@@ -1,0 +1,31 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+# Install the latest WinBoat .deb from GitHub releases.
+set +e
+URL=$(curl -fsSL https://api.github.com/repos/TibixDev/winboat/releases/latest \
+  | jq -r '.assets[] | select(.name|test("amd64\\.deb$")) | .browser_download_url' | head -n1)
+if [ -z "$URL" ]; then
+  echo "W: could not find WinBoat .deb, trying AppImage"
+  URL=""
+  URL=$(curl -fsSL https://api.github.com/repos/TibixDev/winboat/releases/latest \
+    | jq -r '.assets[] | select(.name|test("x86_64\\.AppImage$")) | .browser_download_url' | head -n1)
+  [ -n "$URL" ] || { echo "W: GitHub unreachable, WinBoat not installed"; exit 0; }
+  install -d /opt/winboat
+  curl -fL "$URL" -o /opt/winboat/WinBoat.AppImage && chmod +x /opt/winboat/WinBoat.AppImage
+  ln -sf /opt/winboat/WinBoat.AppImage /usr/local/bin/winboat
+  cat > /usr/share/applications/winboat.desktop <<D
+[Desktop Entry]
+Name=WinBoat
+Comment=Run Windows apps on LinuxSpherso
+Exec=/opt/winboat/WinBoat.AppImage
+Icon=winboat
+Type=Application
+Categories=System;Utility;
+D
+else
+  curl -fL "$URL" -o /tmp/winboat.deb
+  apt-get install -y /tmp/winboat.deb
+  rm -f /tmp/winboat.deb
+fi
+# WinBoat needs KVM + docker access for the user
+systemctl enable docker.service || true

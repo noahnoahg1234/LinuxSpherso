@@ -1,0 +1,39 @@
+# --- KDE Plasma 6 desktop (top bar + floating dock) ---
+task-kde-desktop
+kde-plasma-desktop
+plasma-workspace-wallpapers
+sddm
+sddm-theme-breeze
+kwin-wayland
+plasma-systemmonitor
+kde-config-sddm
+qt-style-kvantum
+papirus-icon-theme
+breeze-gtk-theme
+fonts-jetbrains-mono
+fonts-noto
+fonts-noto-color-emoji
+konsole
+dolphin
+kate
+ark
+gwenview
+okular
+kde-spectacle
+firefox-esr
+plymouth
+plymouth-themes
+# --- installer (live -> disk) ---
+calamares
+calamares-settings-debian
+# --- base ---
+sudo
+network-manager
+plasma-nm
+bluez
+curl
+wget
+ca-certificates
+gnupg
+jq
+git

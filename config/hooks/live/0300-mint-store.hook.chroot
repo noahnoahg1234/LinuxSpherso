@@ -1,0 +1,14 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+# Linux Mint Software Manager (mintinstall) from LMDE 7 "gigi" (Debian trixie based).
+# Non-fatal: if Mint's mirror is unreachable the build continues without it.
+MINT_MIRROR="${MINT_MIRROR:-https://mirrors.edge.kernel.org/linuxmint-packages}"
+POOL="$MINT_MIRROR/pool/main/l/linuxmint-keyring/"
+DEB=$(curl -fsSL "$POOL" | grep -o 'linuxmint-keyring_[^"]*_all\.deb' | sort -V | tail -n1)
+[ -n "$DEB" ] || { echo "W: Mint mirror unreachable, skipping Mint store"; exit 0; }
+curl -fL "$POOL$DEB" -o /tmp/mint-keyring.deb && dpkg -i /tmp/mint-keyring.deb || exit 0
+rm -f /tmp/mint-keyring.deb
+KEY=$(ls /usr/share/keyrings/linuxmint*.gpg 2>/dev/null | head -n1)
+echo "deb [signed-by=$KEY] $MINT_MIRROR gigi main upstream import backport" > /etc/apt/sources.list.d/linuxmint.list
+apt-get update || true
+apt-get install -y mintinstall || echo "W: mintinstall failed to install"

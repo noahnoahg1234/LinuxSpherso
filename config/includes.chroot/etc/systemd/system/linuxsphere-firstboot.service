@@ -1,0 +1,13 @@
+[Unit]
+Description=LinuxSpherso first boot setup (Snap Store)
+Wants=network-online.target snapd.seeded.service
+After=network-online.target snapd.seeded.service
+ConditionPathExists=!/var/lib/linuxsphere/firstboot-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/linuxsphere-firstboot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

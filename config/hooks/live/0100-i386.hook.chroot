@@ -1,0 +1,10 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+# live-build has no multiarch option, so enable i386 here and install 32-bit Wine + Steam (Proton).
+set -e
+dpkg --add-architecture i386
+apt-get update
+echo steam steam/question select "I AGREE" | debconf-set-selections
+echo steam steam/license note '' | debconf-set-selections
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  wine32:i386 libwine:i386 mesa-vulkan-drivers:i386 libgl1-mesa-dri:i386 steam-installer

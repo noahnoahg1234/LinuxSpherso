@@ -1,0 +1,11 @@
+[KDE]
+LookAndFeelPackage=org.linuxsphere.desktop
+AnimationDurationFactor=0.7
+SingleClick=false
+
+[General]
+ColorScheme=BreezeDark
+fixed=JetBrains Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[Icons]
+Theme=Papirus-Dark

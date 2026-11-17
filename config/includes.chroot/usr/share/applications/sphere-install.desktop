@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Sphere Install
+Comment=Install any app: deb, rpm, Flatpak, Snap, AppImage, exe, msi, apk, Arch packages
+Exec=konsole --hold -e sphere-install %f
+Icon=linuxsphere-start
+Type=Application
+NoDisplay=true
+MimeType=application/vnd.debian.binary-package;application/x-rpm;application/x-redhat-package-manager;application/vnd.flatpak.ref;application/vnd.flatpak;application/vnd.flatpak.repo;application/vnd.snap;application/x-appimage;application/vnd.appimage;application/x-ms-dos-executable;application/x-msdownload;application/x-msi;application/vnd.android.package-archive;

@@ -1,0 +1,8 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+# Copy the GRUB theme into /boot (and convert the font) so update-grub on the installed system uses it.
+set -e
+T=/usr/share/grub/themes/linuxsphere
+install -d /boot/grub/themes
+cp -r "$T" /boot/grub/themes/
+[ -f "$T/JetBrainsMono-Regular.ttf" ] && grub-mkfont -s 16 -o /boot/grub/themes/linuxsphere/jetbrains16.pf2 "$T/JetBrainsMono-Regular.ttf" || true

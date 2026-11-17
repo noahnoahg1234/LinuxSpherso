@@ -1,0 +1,19 @@
+# Hardware firmware (explicit list; skips the legacy b43 download-installers)
+firmware-linux
+firmware-linux-nonfree
+firmware-misc-nonfree
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+firmware-brcm80211
+firmware-amd-graphics
+firmware-intel-graphics
+firmware-intel-sound
+firmware-sof-signed
+firmware-mediatek
+firmware-libertas
+firmware-ti-connectivity
+firmware-bnx2
+firmware-bnx2x
+intel-microcode
+amd64-microcode

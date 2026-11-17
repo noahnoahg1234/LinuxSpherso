@@ -1,0 +1,4 @@
+#!/bin/sh
+[ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/*
