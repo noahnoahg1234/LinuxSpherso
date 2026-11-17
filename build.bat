@@ -56,14 +56,18 @@ if errorlevel 1 (
 )
 
 rem --- 4. Build inside WSL ---------------------------------------------------
+rem  Build in your normal WSL user's home so Explorer can open the folder.
+set "WSLUSER="
+for /f "delims=" %%u in ('wsl.exe -d %DISTRO% -- whoami 2^>nul') do set "WSLUSER=%%u"
+if "%WSLUSER%"=="" set "WSLUSER=root"
 echo [*] Building LinuxSpherso inside WSL. This takes 30-90 minutes
 echo     and downloads about 4 GB. Leave this window open.
 echo.
-wsl.exe -d %DISTRO% -u root --cd "%~dp0." -- env WITH_GE_PROTON=%GEPROTON% bash -c "tr -d '\r' < tools/wsl-build.sh | bash"
+wsl.exe -d %DISTRO% -u root --cd "%~dp0." -- env WITH_GE_PROTON=%GEPROTON% WSL_USER=%WSLUSER% bash -c "tr -d '\r' < tools/wsl-build.sh | bash"
 if errorlevel 1 (
   echo.
-  echo [!] The build failed. The full log is in WSL at
-  echo     /root/LinuxSpherso-build/build.log
+  echo [!] The build failed. Open the log in File Explorer:
+  if /i "%WSLUSER%"=="root" (echo     \\wsl.localhost\%DISTRO%\root\LinuxSpherso-build\build.log) else (echo     \\wsl.localhost\%DISTRO%\home\%WSLUSER%\LinuxSpherso-build\build.log)
   goto :fail
 )
 
