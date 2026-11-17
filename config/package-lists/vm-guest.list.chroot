@@ -1,0 +1,7 @@
+# Virtual machine guest tools. Each only activates inside its own hypervisor.
+# VMware: auto-resize, copy/paste, drag & drop, smooth mouse
+open-vm-tools
+open-vm-tools-desktop
+# QEMU/KVM: auto-resize, copy/paste
+spice-vdagent
+qemu-guest-agent

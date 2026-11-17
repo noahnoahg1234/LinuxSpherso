@@ -70,7 +70,9 @@ The output is `LinuxSpherso-amd64.hybrid.iso`. Flash it with Etcher or `dd`, or 
 qemu-system-x86_64 -enable-kvm -m 8G -smp 4 -cdrom LinuxSpherso-amd64.hybrid.iso
 ```
 
-Live user: `sphere` (no password). Use **Install LinuxSpherso** (Calamares) to install it to disk.
+Live user: `sphere` (no password).
+
+**In VMware:** choose Linux → Debian 12.x/13 64-bit, give it 8 GB RAM and 4 CPUs, and tick *Accelerate 3D graphics*. VMware Tools (`open-vm-tools`) are built in, so the screen resizes with the window and copy/paste works. For WinBoat inside the VM, also tick *Virtualize Intel VT-x/EPT or AMD-V/RVI* (needs Hyper-V/WSL2 turned off on the host). Use **Install LinuxSpherso** (Calamares) to install it to disk.
 
 ## Project layout
 
