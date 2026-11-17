@@ -1,0 +1,7 @@
+# Keep Linux line endings for everything (bash breaks on CRLF),
+# except Windows batch files, stored as-is with CRLF (cmd.exe needs it).
+* text=auto eol=lf
+*.bat -text
+*.png binary
+*.ttf binary
+*.svg text eol=lf

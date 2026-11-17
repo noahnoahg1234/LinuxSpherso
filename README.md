@@ -34,6 +34,24 @@ sphere-install org.gimp.GIMP      # Flathub id
 
 ## Build the ISO
 
+### On Windows 10 / 11
+
+Double-click **`build.bat`** (or run `build.bat noproton` to skip GE-Proton).
+
+It builds inside WSL2, the Linux layer built into Windows:
+
+1. The first time, it installs Debian for WSL. A Debian window opens: create a
+   username and password, close it, and run `build.bat` again.
+2. It copies the project into WSL, builds the ISO (30-90 minutes, about 4 GB of
+   downloads) and copies `LinuxSpherso-amd64.hybrid.iso` back next to `build.bat`.
+
+You need about 30 GB free on C:, internet, and virtualization turned on in your
+BIOS. If WSL isn't installed at all, run `wsl --install` in PowerShell as
+Administrator and restart first. Flash the ISO with Rufus (DD mode) or
+balenaEtcher, or boot it in VirtualBox/VMware.
+
+### On Linux
+
 You need a Debian 13 or Ubuntu 24.04+ machine (a VM is fine), root, about 25 GB free, and internet.
 
 ```bash
@@ -57,7 +75,9 @@ Live user: `sphere` (no password). Use **Install LinuxSpherso** (Calamares) to i
 ## Project layout
 
 ```
-build.sh                     one-command build
+build.sh                     one-command build (Linux)
+build.bat                    one-click build on Windows (runs build.sh in WSL2)
+tools/wsl-build.sh           WSL side of build.bat
 auto/config                  live-build options (trixie, GRUB, ISO name, live user)
 config/package-lists/        desktop, grub, gaming (wine/proton), winboat, appstores
 config/hooks/live/           i386 + Steam, WinBoat, Mint store, Flatpaks, GE-Proton, branding, GRUB theme, Calamares

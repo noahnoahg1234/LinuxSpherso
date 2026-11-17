@@ -2,6 +2,7 @@
 [ -f /etc/build-proxy.sh ] && . /etc/build-proxy.sh
 # Optionally preinstall GE-Proton for every new user (adds ~500MB). Set WITH_GE_PROTON=0 to skip.
 set +e
+[ -f /etc/linuxsphere-build.conf ] && . /etc/linuxsphere-build.conf
 [ "${WITH_GE_PROTON:-1}" = "1" ] || exit 0
 URL=$(curl -fsSL https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest \
   | jq -r '.assets[] | select(.name|test("\\.tar\\.gz$")) | .browser_download_url' | head -n1)
