@@ -1,0 +1,8 @@
+#!/bin/sh
+# Let the installer accept any non-empty password.
+# Debian's Calamares config runs libpwquality's dictionary check, which greys
+# out "Next" for passwords based on a word (e.g. "Sphere123") with no way past it.
+F=/etc/calamares/modules/users.conf
+[ -f "$F" ] || exit 0
+grep -q 'dictcheck=0' "$F" || sed -i 's/^\(\s*\)- minclass=0\s*$/&\n\1- dictcheck=0\n\1- usercheck=0/' "$F"
+grep -q '^allowWeakPasswords:' "$F" || printf '\nallowWeakPasswords: true\nallowWeakPasswordsDefault: true\n' >> "$F"

@@ -21,3 +21,5 @@ for f in /usr/share/applications/*install-debian.desktop; do
   [ -f "$f" ] && sed -i 's/^Name=.*/Name=Install LinuxSpherso/; s/^Name\[\(.*\)\]=.*//' "$f"
 done
 true
+# Accept any non-empty password in the installer (no dictionary check)
+/usr/local/bin/linuxsphere-calamares-users
