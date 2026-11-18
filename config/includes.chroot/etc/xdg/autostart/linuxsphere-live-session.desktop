@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=LinuxSpherso live session settings
+Exec=/usr/local/bin/linuxsphere-live-session
+NoDisplay=true
+X-KDE-autostart-phase=1
+OnlyShowIn=KDE;

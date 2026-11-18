@@ -1,0 +1,15 @@
+#!/bin/sh
+# Live session only: don't auto-lock or blank the screen (e.g. during a long install).
+# /run/live exists only when booted from the LinuxSpherso ISO; installed systems are untouched.
+[ -d /run/live ] || exit 0
+W=$(command -v kwriteconfig6 || command -v kwriteconfig5) || exit 0
+"$W" --file kscreenlockerrc --group Daemon --key Autolock false
+"$W" --file kscreenlockerrc --group Daemon --key LockOnResume false
+"$W" --file powerdevilrc --group AC --group Display --key TurnOffDisplayWhenIdle false
+"$W" --file powerdevilrc --group AC --group Display --key DimDisplayWhenIdle false
+"$W" --file powerdevilrc --group AC --group SuspendAndShutdown --key AutoSuspendAction 0
+# Tell the running services to reload their settings
+Q=$(command -v qdbus6 || command -v qdbus) || exit 0
+"$Q" org.freedesktop.ScreenSaver /ScreenSaver configure >/dev/null 2>&1
+"$Q" org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement reparseConfiguration >/dev/null 2>&1
+exit 0
