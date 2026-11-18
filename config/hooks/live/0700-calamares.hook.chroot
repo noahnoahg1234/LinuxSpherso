@@ -23,3 +23,5 @@ done
 true
 # Accept any non-empty password in the installer (no dictionary check)
 /usr/local/bin/linuxsphere-calamares-users
+# Only ask the installer to remove live packages that are actually installed
+/usr/local/bin/linuxsphere-calamares-packages

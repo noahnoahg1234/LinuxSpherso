@@ -28,6 +28,7 @@ calamares
 calamares-settings-debian
 # --- base ---
 sudo
+util-linux-extra
 network-manager
 plasma-nm
 bluez
